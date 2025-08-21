@@ -1,18 +1,14 @@
-import reactLogo from "./assets/react.svg";
-
 import "./App.css";
+import { CornholeThrow } from "./cornhole_guy/cornhole_guy";
 
 function App() {
 	return (
 		<>
 			<div>
-				<a href="https://vite.dev" target="_blank"></a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
+				<CornholeThrow />
 			</div>
-			<h1>Berger Boards</h1>
-			<div className="card"></div>
+			<h1>Berger's Cornhole Boards</h1>
+			<h3>Best in Town!</h3>
 		</>
 	);
 }

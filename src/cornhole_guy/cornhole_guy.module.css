@@ -1,0 +1,160 @@
+.wrap {
+	width: 360px;
+	height: 220px;
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+
+	/* theming */
+	--board: #d9a066;
+	--board-edge: #3a2f1d;
+	--hole: #111;
+	--guy: #fff;
+	--bag: #cc2b2b;
+}
+
+/* Thrower */
+.guy {
+	position: absolute;
+	left: 32px;
+	top: 112px;
+	width: 48px;
+	height: 72px;
+}
+.head {
+	position: absolute;
+	left: 8px;
+	top: -18px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--guy);
+}
+.body {
+	position: absolute;
+	left: 0;
+	top: 4px;
+	width: 10px;
+	height: 46px;
+	background: var(--guy);
+	border-radius: 6px;
+}
+.arm {
+	position: absolute;
+	left: 2px;
+	top: 3px;
+	width: 36px;
+	height: 8px;
+	background: var(--guy);
+	border-radius: 8px;
+	transform-origin: 6px 4px;
+	animation: arm-throw calc(var(--dur) * 0.8) ease-in-out var(--loop) both;
+}
+
+@keyframes arm-throw {
+	0% {
+		transform: rotate(100deg);
+	}
+	5% {
+		transform: rotate(-30deg);
+	}
+	10% {
+		transform: rotate(-50deg);
+	}
+	50% {
+		transform: rotate(20deg);
+	}
+	100% {
+		transform: rotate(100deg);
+	}
+}
+
+/* Board */
+.board {
+	position: absolute;
+	inset: 0;
+}
+.boardTop {
+	fill: var(--board);
+	stroke: var(--board-edge);
+	stroke-width: 4;
+	stroke-linejoin: round;
+}
+.hole {
+	fill: var(--hole);
+}
+
+/* Bag flight + land/slide */
+.bag {
+	position: absolute;
+	left: -20px;
+	top: 20px;
+	width: 12px;
+	height: 12px;
+	background: var(--bag);
+	border-radius: 3px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+
+	offset-path: var(--path);
+	offset-rotate: auto 90deg;
+
+	/* two-phase animation: fly (70%), then slide (30%) */
+	animation:
+		bag-fly calc(var(--dur) * 0.8) cubic-bezier(0.2, 0.6, 0.25, 1) var(--loop)
+		both,
+		bag-slide calc(var(--dur) * 0.3) ease-out var(--loop) both;
+	animation-delay: 0ms, calc(var(--dur) * 0.8);
+}
+
+.wrap {
+	position: relative;
+}
+
+/* put board behind everything */
+.board {
+	position: absolute;
+	transform: translate(10px, 0px);
+	inset: 0;
+	z-index: 1;
+}
+
+/* guy above board */
+.guy {
+	z-index: 2;
+}
+
+/* bag on top */
+.bag {
+	z-index: 3;
+}
+
+@keyframes bag-fly {
+	0% {
+		offset-distance: 8%;
+		transform: translate(-6px, -6px) rotate(0deg);
+	}
+	60% {
+		offset-distance: 60%;
+	}
+	100% {
+		offset-distance: 100%;
+		transform: translate(-2px, -2px) rotate(420deg);
+	}
+}
+
+@keyframes bag-slide {
+	0% {
+		transform: translate(-2px, -2px) rotate(420deg);
+	}
+	100% {
+		transform: translate(var(--slide-x), var(--slide-y)) rotate(450deg);
+	}
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+	.arm,
+	.bag {
+		animation: none !important;
+	}
+}

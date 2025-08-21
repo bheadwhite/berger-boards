@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="32" height="32" role="img" aria-label="Cornhole board icon">
+  <!-- Board -->
+  <path d="M12 50 L18 16 Q19 12 23 12 L41 9 Q45 8 46 12 L42 46 Q41 50 37 51 L17 54 Q13 55 12 50 Z"
+        fill="#d9a066" stroke="#3a2f1d" stroke-width="2" stroke-linejoin="round"/>
+  <!-- Hole (centered horizontally, lower vertically) -->
+  <circle cx="32" cy="22" r="6" fill="#1e1e1e"/>
+</svg>
